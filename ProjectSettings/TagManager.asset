@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Moon
   - Enemy
+  - heart0
+  - heart1
+  - heart2
   layers:
   - Default
   - TransparentFX

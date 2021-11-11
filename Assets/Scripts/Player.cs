@@ -12,11 +12,18 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Rigidbody2D myBody;
     private Animator anim;
+    private SpriteRenderer sr;
+    private bool isGrounded;
+
     private const string WALK_ANIMATION = "Walk";
     private const string ENEMY_TAG = "Enemy";
     private const string GROUND_TAG = "Ground";
-    private SpriteRenderer sr;
-    private bool isGrounded;
+    private const string HEART_0 = "heart0";
+    private const string HEART_1 = "heart1";
+    private const string HEART_2 = "heart2";
+    private int lifes = 3;
+
+    private string[] hearts = new string[] { "heart0", "heart1", "heart2" };
 
     private void Awake()
     {
@@ -75,13 +82,12 @@ public class Player : MonoBehaviour
             isGrounded = true;
 
         if (collision.gameObject.CompareTag(ENEMY_TAG))
-            Destroy(gameObject);
-    }
+        {
+            var heartObj = GameObject.FindGameObjectWithTag(hearts[lifes - 1]);
+            lifes -= 1;
+            Destroy(heartObj);
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag(ENEMY_TAG))
-            Destroy(gameObject);
-        
+            if(lifes < 1) Destroy(gameObject);
+        }
     }
 }
