@@ -18,9 +18,6 @@ public class Player : MonoBehaviour
     private const string WALK_ANIMATION = "Walk";
     private const string ENEMY_TAG = "Enemy";
     private const string GROUND_TAG = "Ground";
-    private const string HEART_0 = "heart0";
-    private const string HEART_1 = "heart1";
-    private const string HEART_2 = "heart2";
     private int lifes = 3;
 
     private string[] hearts = new string[] { "heart0", "heart1", "heart2" };
@@ -59,12 +56,14 @@ public class Player : MonoBehaviour
             anim.SetBool(WALK_ANIMATION, true);
             sr.flipX = false;
         }
+        
         if (movementX < 0)
         {
             anim.SetBool(WALK_ANIMATION, true);
             sr.flipX = true;
         }
-       if(movementX == 0) anim.SetBool(WALK_ANIMATION, false);
+        
+        if(movementX == 0) anim.SetBool(WALK_ANIMATION, false);
     }
 
     void PlayerJump()
@@ -79,7 +78,9 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(GROUND_TAG))
+        {
             isGrounded = true;
+        }
 
         if (collision.gameObject.CompareTag(ENEMY_TAG))
         {
